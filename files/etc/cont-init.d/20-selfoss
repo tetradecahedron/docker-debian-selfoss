@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+
+# Install Selfoss
+if [ ! -f /var/www/html/defaults.ini ]; then
+	unzip -o \
+		/tmp/selfoss-2.18.zip -d /var/www/html/
+	rm /tmp/*
+fi
+
+# Randomize salt for password encryption & copy config.ini
+if [ ! -f /var/www/html/config.ini ]; then
+	sed -i "s/lkjl1289/`cat \/dev\/urandom | tr -dc 'a-zA-Z' | fold -w 20 | head -n 1`/g" /var/www/html/defaults.ini
+	cp /var/www/html/defaults.ini /var/www/html/config.ini
+fi
+
+# copy apache configs
+cp /defaults/apache2.conf /etc/apache2/apache2.conf
+cp /defaults/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# permissions
+chown -R abc:abc \
+	/var/www/html 
