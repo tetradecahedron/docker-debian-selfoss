@@ -1,6 +1,6 @@
 [Selfoss RSS reader](https://selfoss.aditu.de/)
 
-Remove (leave container in timezone UTC) or edit files/etc/cont-init.d/11-timezone to your preference
+Remove (leave container in timezone UTC) or edit files/etc/cont-init.d/11-timezone to your preference.
 
 To keep data persistent mount `/var/www/html` ex:
 [...] -v ./appdata/webapp:/var/www/html [...]
